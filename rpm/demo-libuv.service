@@ -1,0 +1,6 @@
+[Unit]
+Description=demo_libuv oneshot service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/demo_libuv
