@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+CFLAGS = $(shell dpkg-buildflags --get CFLAGS)
+
+%:
+	dh $@ --with systemd
+
+override_dh_auto_build:
+	dh_auto_build
+
+	# this should be handled by upstream makefile instead
+	gcc -luv $(CFLAGS) demo_libuv.c -o demo_libuv
+
+
+override_dh_clean:
+	dh_clean
+
+	rm -f demo_libuv
+
+override_dh_install:
+	# install demo binary
+	mkdir -p debian/packaging-test/usr/bin
+	cp demo_libuv debian/packaging-test/usr/bin/demo_libuv
+	chmod 755 debian/packaging-test/usr/bin/demo_libuv
+
+	dh_install
+
+override_dh_installinit:
+	# we only have systemd unit, no init scripts
+	dh_installinit --name=demo-libuv --noscripts --no-start
+

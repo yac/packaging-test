@@ -1,0 +1,14 @@
+Source: packaging-test
+Section: utils
+Priority: optional
+Maintainer: Jakub Ružička <voice@texnoforge.dev>
+Build-Depends: debhelper (>= 11),
+	       libuv1-dev
+Standards-Version: 4.1.3
+Homepage: https://gitlab.nic.cz/knot/packaging-test
+
+Package: packaging-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Testing Debian package
+ debian package containing demo_libuv executable

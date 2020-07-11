@@ -1,0 +1,28 @@
+Description: Improve greet.sh script
+ Improve greet.sh script as described in Shell scripting section of README.md.
+ .
+ packaging-test (0.2-1) unstable; urgency=medium
+ .
+   * Initial release
+Author: Jakub Ružička <voice@texnoforge.dev>
+
+---
+--- packaging-test-0.2.orig/greet.sh
++++ packaging-test-0.2/greet.sh
+@@ -1,5 +1,14 @@
+ #!/bin/sh
+
+-GREETING="Hello!"
++DAY=$(date +%A)
++GREETING="Hello dear $USER - it's yet another $DAY \\o/"
+
+-echo ${GREETING}
++N=1
++if [ -n "$1" ]; then
++	N=$1
++fi
++
++while [ "$N" -ge 1 ]; do
++	echo "${GREETING}"
++	N=$((N - 1))
++done
